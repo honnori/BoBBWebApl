@@ -2,12 +2,16 @@ class BobbReqController < ApplicationController
   def regist_user
       name = params['user_name']
       if id != nil then
-          user = User.new
-          user.user_name = name
-          user.save
-          
-          user.user_id
-          
+#          user = User.new
+#          user.user_name = name
+#          user.save
+#          reg_id = params[:registration_id]
+#          dev_id = params[:device_id]
+          @device = User.create(:user_name => name
+#                :registration_id => reg_id,
+#               :description => ""
+          )
+          render :json => @device
       end
       
       
