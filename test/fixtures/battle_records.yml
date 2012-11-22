@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  battle_id: 
+  req_user_id: 1
+  res_user_id: 1
+  battle_status: 1
+
+two:
+  battle_id: 
+  req_user_id: 1
+  res_user_id: 1
+  battle_status: 1

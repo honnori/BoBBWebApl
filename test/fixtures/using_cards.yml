@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  battle_id: 1
+  user_id: 1
+  card_num: 1
+  beetlekit_id: 1
+  image_id: MyText
+  image_file_name: MyText
+  beetle_name: MyText
+  type: 1
+  intro: MyText
+  attack: 1
+  defense: 1
+  attribute: 1
+  effect: MyText
+  effect_id: 1
+
+two:
+  battle_id: 1
+  user_id: 1
+  card_num: 1
+  beetlekit_id: 1
+  image_id: MyText
+  image_file_name: MyText
+  beetle_name: MyText
+  type: 1
+  intro: MyText
+  attack: 1
+  defense: 1
+  attribute: 1
+  effect: MyText
+  effect_id: 1

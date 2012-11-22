@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  user_level: 1
+  access_time: 2012-11-18 13:17:47
+  transaction_id: MyText
+
+two:
+  user_id: 1
+  user_level: 1
+  access_time: 2012-11-18 13:17:47
+  transaction_id: MyText
