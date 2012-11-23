@@ -38,11 +38,16 @@ class BobbReqController < ApplicationController
     
     #アクセスログのうち、15分以内の条件で引っ張る
     time = Time.now
-    accesslog = Access.find(:all, :conditions => [" created_at >= '#{Time.utc(time.year, time.month, time.day, time.hour, time.min - 15)}'"])
+#    accesslog = Access.find(:all, :conditions => [" access_time >= '#{Time.utc(time.year, time.month, time.day, time.hour, time.min - 15)}'"])
+#    accesslog = Access.find(:all, :conditions => [" access_time >= '?'", Time.utc(time.year, time.month, time.day, time.hour, time.min - 15)])
+    accesslog = Access.find(:all, :conditions => [" access_time >= '#{time - (60 * 15)}'"])
     
     #将来的にはLVでも絞れるようにしたい
     
     # 条件検索で取得した情報を全てJSON形式で端末へ返却する
+    if (accesslog == nil)
+      render :json => "nodata"
+    end
     render :json => accesslog
     
   end
