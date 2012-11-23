@@ -3,23 +3,23 @@ BoBBWebApl::Application.routes.draw do
 
   get "bobb_req/access_log"
 
-#  get "bobb_req/online_user_list"
+  get "bobb_req/online_user_list"
 
-#  get "bobb_req/request_battle"
+  get "bobb_req/request_battle"
 
-#  get "bobb_req/response_battlereq"
+  get "bobb_req/response_battlereq"
 
-#  get "bobb_req/battle_status"
+  get "bobb_req/battle_status"
 
-#  get "bobb_req/enemy_using_card"
+  get "bobb_req/enemy_using_card"
 
-#  get "bobb_req/regist_using_card"
+  get "bobb_req/regist_using_card"
 
-#  get "bobb_req/regist_selected_card"
+  get "bobb_req/regist_selected_card"
 
-#  get "bobb_req/enemy_selected_card"
+  get "bobb_req/enemy_selected_card"
 
-#  get "bobb_req/battle_stop"
+  get "bobb_req/battle_stop"
 
   post "bobb_req/regist_user"
 
