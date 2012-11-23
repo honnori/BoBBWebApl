@@ -45,10 +45,11 @@ class BobbReqController < ApplicationController
     #将来的にはLVでも絞れるようにしたい
     
     # 条件検索で取得した情報を全てJSON形式で端末へ返却する
-    if (accesslog == nil)
-      render :json => "nodata"
-    end
-    render :json => accesslog
+#    if (accesslog == nil)
+#      render :json => "nodata"
+#    end
+#    render :json => accesslog
+    render :json => Access.all
     
   end
 
