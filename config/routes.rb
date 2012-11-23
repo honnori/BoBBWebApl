@@ -1,7 +1,7 @@
 BoBBWebApl::Application.routes.draw do
   get "bobb_req/regist_user"
 
-#  get "bobb_req/access_log"
+  get "bobb_req/access_log"
 
 #  get "bobb_req/online_user_list"
 
