@@ -16,13 +16,15 @@ class BobbReqController < ApplicationController
   # アクセスログ書き込み
   def access_log
       id = params[:user_id]
+      name = params[:user_name]
       level = params[:user_level]
       transactionId = params[:transaction_id]
       
-      if (id != nil) && (level != nil) && (transactionId != nil) then
+      if (id != nil) && (name != nil) && (level != nil) && (transactionId != nil) then
           # DBにユーザ名をインサートして、インサートしたレコードを取得
           logLine = Access.create(
           :user_id => id,
+          :user_name => name,
           :user_level => level,
           :access_time => Time.now,
           :transaction_id => transactionId)
@@ -45,9 +47,6 @@ class BobbReqController < ApplicationController
     #将来的にはLVでも絞れるようにしたい
     
     # 条件検索で取得した情報を全てJSON形式で端末へ返却する
-    if (accesslog == nil)
-      render :json => "nodata"
-    end
     render :json => accesslog
     
   end
