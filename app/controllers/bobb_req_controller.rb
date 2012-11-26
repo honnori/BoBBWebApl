@@ -6,7 +6,7 @@ class BobbReqController < ApplicationController
   def regist_user
       name = params[:user_name]
       if name != nil then
-          render :text => name
+          render :json => User.all
 
           # DBにユーザ名をインサートして、インサートしたレコードを取得
 #          userLine = User.create(:user_name => name)
