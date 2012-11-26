@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class BobbReqController < ApplicationController
 
   # ユーザ名登録
