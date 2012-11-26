@@ -6,13 +6,16 @@ class BobbReqController < ApplicationController
   def regist_user
       name = params[:user_name]
       if name != nil then
-          render :json => User.all
-
+        
+        userLine = User.all
           # DBにユーザ名をインサートして、インサートしたレコードを取得
 #          userLine = User.create(:user_name => name)
           
           # 登録した情報を全てJSON形式で端末へ返却する
 #          render :json => userLine
+          jsonNanalyzed = ActiveSupport::JSON.encode(userLine)
+          render :text => jsonNanalyzed 
+
       end
       
   end
@@ -57,6 +60,13 @@ class BobbReqController < ApplicationController
 
   # 対戦依頼
   def request_battle
+    @reg_id = params[:registration_id]
+
+    #対戦一覧に1行追加
+    
+    #対戦要求をPUSH
+    
+    
   end
 
   # 対戦依頼への応答
@@ -102,7 +112,7 @@ class BobbReqController < ApplicationController
   GCM_PATH = "/gcm/send"
   
   # Registration ID (Androidアプリ実行時にGCMサーバから発行されたもの)
-  REG_ID = "APA91bHYW76k4HUVUMQM7zqUbbB83ysRzXJkPsh6zn6HlAZm1IBdWKTXHFQEP4u41vu7hdTvfNwTPDvfNaojbGhRFPktf4LTkKg6ciLDSqmMq7isz8QTbCALFAwEjUM8bLghwUotW5rcIvXHd5VogU7OJs7C_AD2-Q"
+#  REG_ID = "APA91bHYW76k4HUVUMQM7zqUbbB83ysRzXJkPsh6zn6HlAZm1IBdWKTXHFQEP4u41vu7hdTvfNwTPDvfNaojbGhRFPktf4LTkKg6ciLDSqmMq7isz8QTbCALFAwEjUM8bLghwUotW5rcIvXHd5VogU7OJs7C_AD2-Q"
   # APIキー (Google APIs Consoleで発行されたもの)
   API_KEY = "AIzaSyCDMlzrcinT_WgnDd1frr8O76kTqIGvMmA"
 
@@ -110,11 +120,12 @@ class BobbReqController < ApplicationController
       
         # 送信するメッセージの内容
         message = {
-          "registration_ids" => [REG_ID],
+#          "registration_ids" => [REG_ID],
+          "registration_ids" => [@reg_id],
           "collapse_key" => "collapse_key",
           "delay_while_idle" => false,
           "time_to_live" => 60,
-          "data" => { "message" => "GCM Demo",
+          "data" => { "message" => "Battle Request",
                       "detail" => "Hello world"}
         }
         
