@@ -1,6 +1,14 @@
 # coding: utf-8
 
 class BobbReqController < ApplicationController
+  
+  
+  def index
+        @users = User.all
+#        jsonNanalyzed = ActiveSupport::JSON.encode(userLine)
+#        render :text => jsonNanalyzed 
+    
+  end
 
   # ユーザ名登録
   def regist_user
@@ -9,13 +17,10 @@ class BobbReqController < ApplicationController
         
         userLine = User.all
           # DBにユーザ名をインサートして、インサートしたレコードを取得
-#          userLine = User.create(:user_name => name)
+          userLine = User.create(:user_name => name)
           
           # 登録した情報を全てJSON形式で端末へ返却する
-#          render :json => userLine
-          jsonNanalyzed = ActiveSupport::JSON.encode(userLine)
-          render :text => jsonNanalyzed 
-
+          render :json => userLine
       end
       
   end

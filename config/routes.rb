@@ -1,4 +1,6 @@
 BoBBWebApl::Application.routes.draw do
+  get "bobb_req/index"
+
   get "bobb_req/regist_user"
 
   get "bobb_req/access_log"
