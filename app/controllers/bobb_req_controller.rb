@@ -5,9 +5,7 @@ class BobbReqController < ApplicationController
   
   def index
         @users = User.all
-#        jsonNanalyzed = ActiveSupport::JSON.encode(userLine)
-#        render :text => jsonNanalyzed 
-    
+        @accessList = Access.all
   end
 
   # ユーザ名登録
@@ -20,7 +18,10 @@ class BobbReqController < ApplicationController
           userLine = User.create(:user_name => name)
           
           # 登録した情報を全てJSON形式で端末へ返却する
-          render :json => userLine
+          
+          jsonNanalyzed = ActiveSupport::JSON.encode(userLine)
+          render :text => jsonNanalyzed
+#          render :json => userLine
       end
       
   end

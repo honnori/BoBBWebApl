@@ -18,3 +18,23 @@
 </table>
 
 
+<h1>アクセスログ</h1>
+
+<table class="accessList">
+  <tr>
+    <td>User ID</td>
+    <td>User Name</td>
+    <td>Level</td>
+    <td>アクセス時間</td>
+    <td>registration_id</td>
+  </tr>
+  <% @accessList.each do |access| %>
+  <tr>
+    <td><%= access.user_id %></td>
+    <td><%= access.user_name %></td>
+    <td><%= access.user_level  %></td>
+    <td><%= access.access_time  %></td>
+    <td><%= access.transaction_id %></td>
+  </tr>
+  <% end %>
+</table>

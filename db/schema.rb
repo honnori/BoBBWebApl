@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20121118041937) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "user_id"
+    t.text     "user_name"
     t.integer  "user_level"
     t.datetime "access_time"
     t.text     "transaction_id"
