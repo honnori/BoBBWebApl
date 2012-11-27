@@ -87,6 +87,10 @@ class BobbReqController < ApplicationController
           #対戦要求をPUSH
           sender = GcmSender.new
           sender.send(reg_id)
+          
+          # ステータス情報をJSON形式で端末へ返却する
+          render :json => logLine
+          
       end
     
   end
@@ -97,6 +101,14 @@ class BobbReqController < ApplicationController
 
   # 対戦ステータス確認
   def battle_status
+        # 対戦IDをキーに対戦のステータスを確認
+        battle_id = params[:battle_id]
+        if (battle_id != nil) then
+            battleRecord = BattleRecord.find(:battle_status, :conditions => [" battle_id = ?", battle_id])
+            
+            # ステータス情報をJSON形式で端末へ返却する
+            render :json => battleRecord
+        end
   end
 
   # 対戦相手カード情報取得要求
