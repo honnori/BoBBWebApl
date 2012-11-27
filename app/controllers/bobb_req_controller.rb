@@ -54,16 +54,11 @@ class BobbReqController < ApplicationController
   # 対戦ユーザ一覧要求
   def online_user_list
     
-    #-----------------------------------
-    # 現在、ユーザID重複時にはじく処理が実装されていないため、今後、対処が必要。
-    #-----------------------------------
     user_id = params[:user_id]
     level = params[:user_level]
     
     #アクセスログのうち、15分以内の条件で引っ張る
     time = Time.now
-#    accesslog = Access.find(:all, :conditions => [" access_time >= '#{Time.utc(time.year, time.month, time.day, time.hour, time.min - 15)}'"])
-#    accesslog = Access.find(:all, :conditions => [" access_time >= '?'", Time.utc(time.year, time.month, time.day, time.hour, time.min - 15)])
     accesslogs = Access.find(:all, :conditions => [" access_time >= '#{time - (60 * 15)}'"])
     
     #将来的にはLVでも絞れるようにしたい
