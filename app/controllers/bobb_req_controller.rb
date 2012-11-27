@@ -6,6 +6,8 @@ class BobbReqController < ApplicationController
   def index
         @users = User.all
         @accessList = Access.all
+        @BattleRecords = BattleRecord.all
+        
   end
 
   # ユーザ名登録
@@ -66,11 +68,26 @@ class BobbReqController < ApplicationController
 
   # 対戦依頼
   def request_battle
-    @reg_id = params[:registration_id]
-
-    #対戦一覧に1行追加
-    
-    #対戦要求をPUSH
+      req_user_id = params[:req_user_id]
+      res_user_id = params[:res_user_id]
+      reg_id = params[:registration_id]
+  
+      if ((req_user_id != nil) && (res_user_id != nil) && (reg_id != nil)) then
+          #--------------------
+          #  対戦一覧に1行追加
+          #--------------------
+          # ステータスを0に設定　依頼中(0)、開始(1)、拒否(2)、終了(3)
+          battle_status = 0
+          # 対戦履歴にデータインサート
+          logLine = BattleRecord.create(
+            :req_user_id => req_user_id,
+            :res_user_id => res_user_id,
+            :battle_status => battle_status)
+          
+          #対戦要求をPUSH
+          sender = GcmSender.new
+          sender.send(reg_id)
+      end
     
     
   end
@@ -122,12 +139,12 @@ class BobbReqController < ApplicationController
   # APIキー (Google APIs Consoleで発行されたもの)
   API_KEY = "AIzaSyCDMlzrcinT_WgnDd1frr8O76kTqIGvMmA"
 
-    def send
+    def send(registrationid)
       
         # 送信するメッセージの内容
         message = {
 #          "registration_ids" => [REG_ID],
-          "registration_ids" => [@reg_id],
+          "registration_ids" => [registrationid],
           "collapse_key" => "collapse_key",
           "delay_while_idle" => false,
           "time_to_live" => 60,

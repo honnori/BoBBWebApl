@@ -38,3 +38,22 @@
   </tr>
   <% end %>
 </table>
+
+<h1>対戦履歴</h1>
+
+<table class="accessList">
+  <tr>
+    <td>対戦ID</td>
+    <td>対戦要求者ID</td>
+    <td>対戦応答者ID</td>
+    <td>ステータス</td>
+  </tr>
+  <% @accessList.each do |access| %>
+  <tr>
+    <td><%= access.id %></td>
+    <td><%= access.req_user_id %></td>
+    <td><%= access.res_user_id  %></td>
+    <td><%= access.battle_status  %></td>
+  </tr>
+  <% end %>
+</table>
