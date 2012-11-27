@@ -2,6 +2,7 @@
 
 class BobbReqController < ApplicationController
   
+  require 'json'
   
   def index
         @users = User.all
@@ -53,16 +54,69 @@ class BobbReqController < ApplicationController
   # 対戦ユーザ一覧要求
   def online_user_list
     
+    #-----------------------------------
+    # 現在、ユーザID重複時にはじく処理が実装されていないため、今後、対処が必要。
+    #-----------------------------------
+    user_id = params[:user_id]
+    level = params[:user_level]
+    
     #アクセスログのうち、15分以内の条件で引っ張る
     time = Time.now
 #    accesslog = Access.find(:all, :conditions => [" access_time >= '#{Time.utc(time.year, time.month, time.day, time.hour, time.min - 15)}'"])
 #    accesslog = Access.find(:all, :conditions => [" access_time >= '?'", Time.utc(time.year, time.month, time.day, time.hour, time.min - 15)])
-    accesslog = Access.find(:all, :conditions => [" access_time >= '#{time - (60 * 15)}'"])
+    accesslogs = Access.find(:all, :conditions => [" access_time >= '#{time - (60 * 15)}'"])
     
     #将来的にはLVでも絞れるようにしたい
     
+    
+    #ユーザIDをキーに対戦要求が出されていて、対戦ステータスが"0"のものを一覧に追加する。その際、対戦IDの項目も付加する。
+    responselist = Array.new
+    useridlist = Array.new
+    
+    status = 0
+    battleRecord = BattleRecord.find(:all, \
+                      :select => ["battle_records.req_user_id", "battle_records.id"], \
+                      :conditions => ["res_user_id = ? and battle_status = ?", user_id, status])
+                      
+    battleRecord.each do |record|
+        # アクセスログから、本リクエストをかけたユーザに対戦要求をしているユーザの最新のアクセスログを取得する
+        user_access_info = Access.find(:last, :conditions => ["id = ?", record.req_user_id])
+      
+        response = {
+          "user_id" => user_access_info.user_id,
+          "user_name" => user_access_info.user_name,
+          "user_level" => user_access_info.user_level,
+          "transaction_id" => user_access_info.transaction_id,
+          "battle_id" => record.id
+        }
+        useridlist.push(user_access_info.user_id)
+        responselist.push(response)
+    end
+    
+    
+    # 既出のレコードを追加
+    accesslogs.each do |accesslog|
+      
+      # 既に追加しているIDと一致しなければ追加する
+      if useridlist.include?(!accesslog.user_id)
+        # アクセスログに対戦ID=0を付加
+        response = {
+          "user_id" => accesslog.user_id,
+          "user_name" => accesslog.user_name,
+          "user_level" => accesslog.user_level,
+          "transaction_id" => accesslog.transaction_id,
+          "battle_id" => 0
+        }
+        responselist.push(response)
+      end
+
+    end
+    
+    # ユーザIDをキーに
+    
+    
     # 条件検索で取得した情報を全てJSON形式で端末へ返却する
-    render :json => accesslog
+    render :json => responselist
     
   end
 
@@ -97,6 +151,7 @@ class BobbReqController < ApplicationController
 
   # 対戦依頼への応答
   def response_battlereq
+    
   end
 
   # 対戦ステータス確認
@@ -104,7 +159,7 @@ class BobbReqController < ApplicationController
         # 対戦IDをキーに対戦のステータスを確認
         battle_id = params[:battle_id]
         if (battle_id != nil) then
-            battleRecord = BattleRecord.find(:all, :select => ["battle_records.battle_status", "battle_records.id"], :conditions => ["id = ?", battle_id])
+            battleRecord = BattleRecord.find(:last, :select => ["battle_records.battle_status", "battle_records.id"], :conditions => ["id = ?", battle_id])
             
             # ステータス情報をJSON形式で端末へ返却する
             render :json => battleRecord
