@@ -98,7 +98,7 @@ class BobbReqController < ApplicationController
     accesslogs.each do |accesslog|
       
       # 既に追加しているIDと一致しなければ追加する
-      if useridlist.include?(!accesslog.user_id)
+      if (! useridlist.include?(accesslog.user_id))
         # アクセスログに対戦ID=0を付加
         response = {
           "user_id" => accesslog.user_id,
