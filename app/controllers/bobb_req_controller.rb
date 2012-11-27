@@ -89,7 +89,6 @@ class BobbReqController < ApplicationController
           sender.send(reg_id)
       end
     
-    
   end
 
   # 対戦依頼への応答
