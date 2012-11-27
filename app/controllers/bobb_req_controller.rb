@@ -104,7 +104,7 @@ class BobbReqController < ApplicationController
         # 対戦IDをキーに対戦のステータスを確認
         battle_id = params[:battle_id]
         if (battle_id != nil) then
-            battleRecord = BattleRecord.find(:battle_status, :conditions => [" battle_id = ?", battle_id])
+            battleRecord = BattleRecord.find(:all, :conditions => [" battle_id = ?", battle_id])
             
             # ステータス情報をJSON形式で端末へ返却する
             render :json => battleRecord
