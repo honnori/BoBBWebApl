@@ -22,9 +22,9 @@ class BobbReqController < ApplicationController
           
           # 登録した情報を全てJSON形式で端末へ返却する
           
-          jsonNanalyzed = ActiveSupport::JSON.encode(userLine)
-          render :text => jsonNanalyzed
-#          render :json => userLine
+#          jsonNanalyzed = ActiveSupport::JSON.encode(userLine)
+#          render :text => jsonNanalyzed
+          render :json => userLine
       end
       
   end
@@ -120,7 +120,7 @@ class BobbReqController < ApplicationController
       req_user_id = params[:req_user_id]
       res_user_id = params[:res_user_id]
       reg_id = params[:registration_id]
-  
+
       if ((req_user_id != nil) && (res_user_id != nil) && (reg_id != nil)) then
           #--------------------
           #  対戦一覧に1行追加
@@ -146,7 +146,15 @@ class BobbReqController < ApplicationController
 
   # 対戦依頼への応答
   def response_battlereq
-    
+      battle_id = params[:battle_id]
+      
+      if (battle_id != nil) then
+          # ステータスを0に設定　依頼中(0)、開始(1)、拒否(2)、終了(3)
+          record = BattleRecord.where(:id => battle_id).first
+          record.update_attributes( :battle_status => "1" )
+          render :json => record
+      end
+
   end
 
   # 対戦ステータス確認
@@ -154,8 +162,8 @@ class BobbReqController < ApplicationController
         # 対戦IDをキーに対戦のステータスを確認
         battle_id = params[:battle_id]
         if (battle_id != nil) then
-            battleRecord = BattleRecord.find(:last, :select => ["battle_records.battle_status", "battle_records.id"], :conditions => ["id = ?", battle_id])
-            
+            battleRecord = BattleRecord.find(:first, :select => ["battle_records.battle_status", "battle_records.id"], :conditions => ["id = ?", battle_id])
+             
             # ステータス情報をJSON形式で端末へ返却する
             render :json => battleRecord
         end
@@ -196,7 +204,6 @@ class BobbReqController < ApplicationController
   GCM_PATH = "/gcm/send"
   
   # Registration ID (Androidアプリ実行時にGCMサーバから発行されたもの)
-#  REG_ID = "APA91bHYW76k4HUVUMQM7zqUbbB83ysRzXJkPsh6zn6HlAZm1IBdWKTXHFQEP4u41vu7hdTvfNwTPDvfNaojbGhRFPktf4LTkKg6ciLDSqmMq7isz8QTbCALFAwEjUM8bLghwUotW5rcIvXHd5VogU7OJs7C_AD2-Q"
   # APIキー (Google APIs Consoleで発行されたもの)
   API_KEY = "AIzaSyCDMlzrcinT_WgnDd1frr8O76kTqIGvMmA"
 
