@@ -191,38 +191,21 @@ class BobbReqController < ApplicationController
       
       jsonNanalyzed.each do |record|
           # 使用カード情報テーブルにデータインサート
-#          cards = UsingCard.create(
-#            :battle_id => battle_id,
-#            :user_id => user_id,
-#            :card_num => record.fetch("card_num"),
-#            :beetlekit_id => record.fetch("beetlekit_id"),
-#            :image_id => record.fetch("image_id"),
-#            :image_file_name => record.fetch("image_file_name"),
-#            :beetle_name => record.fetch("beetle_name"),
-#            :type => record.fetch("type"),
-#            :intro => record.fetch("intro"),
-#            :attack => record.fetch("attack"),
- #           :defense => record.fetch("defense"),
-#            :attribute => record.fetch("attribute"),
-#            :effect => record.fetch("effect"),
-#            :effect_id => record.fetch("effect_id"))
-            
-       cards = UsingCard.create(
+          cards = Battleusingcard.create(
             :battle_id => battle_id,
             :user_id => user_id,
-            :card_num => user_id,
-            :beetlekit_id => user_id,
-            :image_id => user_id,
-            :image_file_name => user_id,
-            :beetle_name => user_id,
-            :type => user_id,
-            :intro => user_id,
-            :attack => user_id,
-            :defense => user_id,
-            :attribute => user_id,
-            :effect => user_id,
-            :effect_id => user_id)
-
+            :card_num => record.fetch("card_num"),
+            :beetlekit_id => record.fetch("beetlekit_id"),
+            :image_id => record.fetch("image_id"),
+            :image_file_name => record.fetch("image_file_name"),
+            :beetle_name => record.fetch("beetle_name"),
+            :cardtype => record.fetch("type"),
+            :intro => record.fetch("intro"),
+            :attack => record.fetch("attack"),
+            :defense => record.fetch("defense"),
+            :cardattr => record.fetch("attribute"),
+            :effect => record.fetch("effect"),
+            :effect_id => record.fetch("effect_id"))
       end
       
       render :json => jsonNanalyzed

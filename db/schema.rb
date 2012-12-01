@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118041937) do
+ActiveRecord::Schema.define(:version => 20121201030834) do
 
   create_table "accesses", :force => true do |t|
     t.integer  "user_id"
@@ -29,6 +29,25 @@ ActiveRecord::Schema.define(:version => 20121118041937) do
     t.integer  "battle_status"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "battleusingcards", :force => true do |t|
+    t.integer  "battle_id"
+    t.integer  "user_id"
+    t.integer  "card_num"
+    t.integer  "beetlekit_id"
+    t.text     "image_id"
+    t.text     "image_file_name"
+    t.text     "beetle_name"
+    t.integer  "cardtype"
+    t.text     "intro"
+    t.text     "attack"
+    t.integer  "defense"
+    t.integer  "cardattr"
+    t.text     "effect"
+    t.integer  "effect_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "selected_cards", :force => true do |t|
@@ -61,6 +80,24 @@ ActiveRecord::Schema.define(:version => 20121118041937) do
     t.integer  "attribute"
     t.text     "effect"
     t.integer  "effect_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "usingcards", :force => true do |t|
+    t.integer  "battle_id"
+    t.integer  "user_id"
+    t.integer  "card_num"
+    t.integer  "beetlekit_id"
+    t.text     "image_id"
+    t.text     "image_file_name"
+    t.text     "beetle_name"
+    t.integer  "cardtype"
+    t.text     "intro"
+    t.text     "attack"
+    t.integer  "defense"
+    t.integer  "cardattr"
+    t.text     "effect"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

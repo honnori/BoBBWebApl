@@ -1,6 +1,6 @@
-class CreateUsingCards < ActiveRecord::Migration
+class CreateBattleusingcards < ActiveRecord::Migration
   def change
-    create_table :using_cards do |t|
+    create_table :battleusingcards do |t|
       t.integer :battle_id
       t.integer :user_id
       t.integer :card_num
@@ -8,11 +8,11 @@ class CreateUsingCards < ActiveRecord::Migration
       t.text :image_id
       t.text :image_file_name
       t.text :beetle_name
-      t.integer :type
+      t.integer :cardtype
       t.text :intro
-      t.integer :attack
+      t.text :attack
       t.integer :defense
-      t.integer :attribute
+      t.integer :cardattr
       t.text :effect
       t.integer :effect_id
 
