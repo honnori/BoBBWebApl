@@ -175,7 +175,7 @@ class BobbReqController < ApplicationController
         battle_id = params[:battle_id]
         user_id = params[:user_id]
 
-        cards = UsingCard.find(:all, :conditions => ["battle_id = ? and user_id = ?", battle_id, user_id])
+        cards = Battleusingcard.find(:all, :conditions => ["battle_id = ? and user_id = ?", battle_id, user_id])
 
         render :json => cards
     
