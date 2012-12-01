@@ -57,3 +57,50 @@
   </tr>
   <% end %>
 </table>
+
+<h1>対戦履歴</h1>
+
+<table class="BattleRecords">
+  <tr>
+    <td>ユーザID</td>
+    <td>対戦ID</td>
+    <td>カードNO</td>
+    <td>タイプ</td>
+    <td>虫の名前</td>
+    <td>属性</td>
+    <td>攻撃</td>
+    <td>守備</td>
+    <td>画像ファイル名</td>
+    <td>画像ID</td>
+    <td>効果ID</td>
+    <td>効果説明</td>
+    <td>カード説明</td>
+    <td>虫キットID</td>
+  </tr>
+  <% @cards.each do |card| %>
+  <tr>
+    <td><%= card.user_id %></td>
+    <td><%= card.battle_id %></td>
+    <td><%= card.card_num  %></td>
+    <td><%= card.type  %></td>
+    <td><%= card.beetle_name  %></td>
+    <td><%= card.attribute  %></td>
+    <td><%= card.attack  %></td>
+    <td><%= card.defense  %></td>
+    <td><%= card.image_file_name  %></td>
+    <td><%= card.image_id  %></td>
+    <td><%= card.effect_id  %></td>
+    <td><%= card.effect  %></td>
+    <td><%= card.intro  %></td>
+    <td><%= card.beetlekit_id  %></td>
+  </tr>
+  <% end %>
+</table>
+
+
+
+
+
+
+
+
