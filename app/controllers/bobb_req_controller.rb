@@ -210,22 +210,22 @@ class BobbReqController < ApplicationController
        cards = UsingCard.create(
             :battle_id => battle_id,
             :user_id => user_id,
-            :card_num => "1",
-            :beetlekit_id => "1",
-            :image_id => "1",
-            :image_file_name => "image_file_name",
-            :beetle_name => "beetle_name",
-            :type => "4",
-            :intro => "intro",
-            :attack => "100",
-            :defense => "100",
-            :attribute => "attribute",
-            :effect => "effect",
-            :effect_id => "1")
+            :card_num => user_id,
+            :beetlekit_id => user_id,
+            :image_id => user_id,
+            :image_file_name => user_id,
+            :beetle_name => user_id,
+            :type => user_id,
+            :intro => user_id,
+            :attack => user_id,
+            :defense => user_id,
+            :attribute => user_id,
+            :effect => user_id,
+            :effect_id => user_id)
 
       end
       
-      render :json => "success"
+      render :json => jsonNanalyzed
     
   end
 
