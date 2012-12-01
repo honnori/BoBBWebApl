@@ -221,7 +221,7 @@ class BobbReqController < ApplicationController
             :defense => "100",
             :attribute => "attribute",
             :effect => "effect",
-            :effect_id => "1)
+            :effect_id => "1")
 
       end
       
