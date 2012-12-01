@@ -189,26 +189,26 @@ class BobbReqController < ApplicationController
 
       jsonNanalyzed = ActiveSupport::JSON.decode(beetel_card_infolist)
       
+      jsonNanalyzed.each do |record|
+          # 使用カード情報テーブルにデータインサート
+          cards = UsingCard.create(
+            :battle_id => record.fetch("battle_id"),
+            :user_id => record.fetch("user_id"),
+            :card_num => record.fetch("card_num"),
+            :beetlekit_id => record.fetch("beetlekit_id"),
+            :image_id => record.fetch("image_id"),
+            :image_file_name => record.fetch("image_file_name"),
+            :beetle_name => record.fetch("beetle_name"),
+            :type => record.fetch("type"),
+            :intro => record.fetch("intro"),
+            :attack => record.fetch("attack"),
+            :defense => record.fetch("defense"),
+            :attribute => record.fetch("attribute"),
+            :effect => record.fetch("effect"),
+            :effect_id => record.fetch("effect_id"))
+      end
+      
       render :text => jsonNanalyzed
-
-#      jsonNanalyzed.each do |record|
-#          # 使用カード情報テーブルにデータインサート
-#          cards = UsingCard.create(
-#            :battle_id => record.fetch("battle_id"),
-#            :user_id => record.fetch("user_id"),
-#            :card_num => record.fetch("card_num"),
-#            :beetlekit_id => record.fetch("beetlekit_id"),
-#            :image_id => record.fetch("image_id"),
-#            :image_file_name => record.fetch("image_file_name"),
-#            :beetle_name => record.fetch("beetle_name"),
-#            :type => record.fetch("type"),
-#            :intro => record.fetch("intro"),
-#            :attack => record.fetch("attack"),
-#            :defense => record.fetch("defense"),
-#            :attribute => record.fetch("attribute"),
-#            :effect => record.fetch("effect"),
-#            :effect_id => record.fetch("effect_id"))
-#      end
       
 #      render :json => "success"
     
