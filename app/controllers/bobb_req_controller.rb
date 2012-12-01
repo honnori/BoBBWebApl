@@ -199,11 +199,11 @@ class BobbReqController < ApplicationController
             :image_id => record.fetch("image_id"),
             :image_file_name => record.fetch("image_file_name"),
             :beetle_name => record.fetch("beetle_name"),
-            :cardtype => record.fetch("type"),
+            :cardtype => record.fetch("cardtype"),
             :intro => record.fetch("intro"),
             :attack => record.fetch("attack"),
             :defense => record.fetch("defense"),
-            :cardattr => record.fetch("attribute"),
+            :cardattr => record.fetch("cardattr"),
             :effect => record.fetch("effect"),
             :effect_id => record.fetch("effect_id"))
       end

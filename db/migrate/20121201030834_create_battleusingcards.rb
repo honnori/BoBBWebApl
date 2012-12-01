@@ -12,7 +12,7 @@ class CreateBattleusingcards < ActiveRecord::Migration
       t.text :intro
       t.text :attack
       t.integer :defense
-      t.integer :cardattr
+      t.text :cardattr
       t.text :effect
       t.integer :effect_id
 
