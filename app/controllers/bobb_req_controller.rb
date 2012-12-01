@@ -8,7 +8,7 @@ class BobbReqController < ApplicationController
         @users = User.all
         @accessList = Access.all
         @BattleRecords = BattleRecord.all
-        @cards = UsingCard.all
+        @cards = Battleusingcard.all
         
   end
 
