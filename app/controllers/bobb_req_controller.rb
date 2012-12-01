@@ -185,15 +185,15 @@ class BobbReqController < ApplicationController
   def regist_using_card
     
       battle_id = params[:battle_id]
+      user_id = params[:user_id]
       beetel_card_infolist = params[:beetel_card_infolist]
-
       jsonNanalyzed = ActiveSupport::JSON.decode(beetel_card_infolist)
       
       jsonNanalyzed.each do |record|
           # 使用カード情報テーブルにデータインサート
           cards = UsingCard.create(
-            :battle_id => record.fetch("battle_id"),
-            :user_id => record.fetch("user_id"),
+            :battle_id => battle_id,
+            :user_id => user_id,
             :card_num => record.fetch("card_num"),
             :beetlekit_id => record.fetch("beetlekit_id"),
             :image_id => record.fetch("image_id"),
@@ -208,9 +208,7 @@ class BobbReqController < ApplicationController
             :effect_id => record.fetch("effect_id"))
       end
       
-      render :text => jsonNanalyzed
-      
-#      render :json => "success"
+      render :json => "success"
     
   end
 
