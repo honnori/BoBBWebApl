@@ -191,21 +191,38 @@ class BobbReqController < ApplicationController
       
       jsonNanalyzed.each do |record|
           # 使用カード情報テーブルにデータインサート
-          cards = UsingCard.create(
+#          cards = UsingCard.create(
+#            :battle_id => battle_id,
+#            :user_id => user_id,
+#            :card_num => record.fetch("card_num"),
+#            :beetlekit_id => record.fetch("beetlekit_id"),
+#            :image_id => record.fetch("image_id"),
+#            :image_file_name => record.fetch("image_file_name"),
+#            :beetle_name => record.fetch("beetle_name"),
+#            :type => record.fetch("type"),
+#            :intro => record.fetch("intro"),
+#            :attack => record.fetch("attack"),
+ #           :defense => record.fetch("defense"),
+#            :attribute => record.fetch("attribute"),
+#            :effect => record.fetch("effect"),
+#            :effect_id => record.fetch("effect_id"))
+            
+       cards = UsingCard.create(
             :battle_id => battle_id,
             :user_id => user_id,
-            :card_num => record.fetch("card_num"),
-            :beetlekit_id => record.fetch("beetlekit_id"),
-            :image_id => record.fetch("image_id"),
-            :image_file_name => record.fetch("image_file_name"),
-            :beetle_name => record.fetch("beetle_name"),
-            :type => record.fetch("type"),
-            :intro => record.fetch("intro"),
-            :attack => record.fetch("attack"),
-            :defense => record.fetch("defense"),
-            :attribute => record.fetch("attribute"),
-            :effect => record.fetch("effect"),
-            :effect_id => record.fetch("effect_id"))
+            :card_num => "1",
+            :beetlekit_id => "1",
+            :image_id => "1",
+            :image_file_name => "image_file_name",
+            :beetle_name => "beetle_name",
+            :type => "4",
+            :intro => "intro",
+            :attack => "100",
+            :defense => "100",
+            :attribute => "attribute",
+            :effect => "effect",
+            :effect_id => "1)
+
       end
       
       render :json => "success"
