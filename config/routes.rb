@@ -23,6 +23,8 @@ BoBBWebApl::Application.routes.draw do
 
   get "bobb_req/battle_stop"
 
+  get "bobb_req/delete"
+
   post "bobb_req/regist_user"
 
   post "bobb_req/access_log"

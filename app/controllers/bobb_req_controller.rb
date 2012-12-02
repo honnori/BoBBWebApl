@@ -222,8 +222,38 @@ class BobbReqController < ApplicationController
 
   # 対戦終了/中断通知
   def battle_stop
+      battle_id = params[:battle_id]
+      status = params[:status]
+      
+      if (battle_id != nil) then
+          # ステータスを0に設定　依頼中(0)、開始(1)、拒否(2)、終了(3)
+          record = BattleRecord.where(:id => battle_id).first
+          record.update_attributes( :battle_status => status )
+          render :json => record
+      end
+
   end
   
+  # レコード削除
+  def delete
+#        @users = User.all
+#        @users.destroy
+        
+        @accessList = Access.all
+        @accessList.destroy
+        
+        @BattleRecords = BattleRecord.all
+        @BattleRecords.destroy
+
+        @cards = Battleusingcard.all
+        @cards.destroy
+
+        @selectCards = SelectedCard.all
+        @selectCards.destroy
+
+        render :json => "delete finish"
+
+  end
   
   #-----------------------------
   #  以下、サンプルをほぼ張り付け。解析が必要  
