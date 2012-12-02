@@ -74,6 +74,7 @@ class BobbReqController < ApplicationController
                       :select => ["battle_records.req_user_id", "battle_records.id"], \
                       :conditions => ["res_user_id = ? and battle_status = ?", user_id, status])
                       
+    
     battleRecord.each do |record|
         # アクセスログから、本リクエストをかけたユーザに対戦要求をしているユーザの最新のアクセスログを取得する
         user_access_info = Access.find(:last, :conditions => ["id = ?", record.req_user_id])
@@ -236,14 +237,10 @@ class BobbReqController < ApplicationController
   
   # レコード削除
   def delete
-#        User.delete_all
-        
+        User.delete_all
         Access.delete_all
-        
         BattleRecord.delete_all
-
         Battleusingcard.delete_all
-
         SelectedCard.delete_all
 
         render :json => "delete finish"
