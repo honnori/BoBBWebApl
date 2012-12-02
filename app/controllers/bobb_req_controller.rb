@@ -9,7 +9,7 @@ class BobbReqController < ApplicationController
         @accessList = Access.all
         @BattleRecords = BattleRecord.all
         @cards = Battleusingcard.all
-        @selectesCards = SelectedCard.delete_all
+        @selectedCards = SelectedCard.all
         
   end
 
