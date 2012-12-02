@@ -98,5 +98,24 @@
 </table>
 
 
+<h1>ターン毎の選択カード</h1>
+
+<table class="BattleRecords">
+  <tr>
+    <td>対戦ID</td>
+    <td>選択ユーザID</td>
+    <td>ターン</td>
+    <td>カードNo</td>
+  </tr>
+  <% @selectesCards.each do |scard| %>
+  <tr>
+    <td><%= scard.battle_id %></td>
+    <td><%= scard.user_id  %></td>
+    <td><%= scard.turn_num  %></td>
+    <td><%= scard.card_num %></td>
+  </tr> 
+  <% end %>
+</table>
+
 
 
