@@ -236,20 +236,15 @@ class BobbReqController < ApplicationController
   
   # レコード削除
   def delete
-#        @users = User.all
-#        @users.destroy
+#        User.delete_all
         
-        @accessList = Access.all
-        @accessList.destroy
+        Access.delete_all
         
-        @BattleRecords = BattleRecord.all
-        @BattleRecords.destroy
+        BattleRecord.delete_all
 
-        @cards = Battleusingcard.all
-        @cards.destroy
+        Battleusingcard.delete_all
 
-        @selectCards = SelectedCard.all
-        @selectCards.destroy
+        SelectedCard.delete_all
 
         render :json => "delete finish"
 
