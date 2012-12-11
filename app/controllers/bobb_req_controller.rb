@@ -61,7 +61,7 @@ class BobbReqController < ApplicationController
     
     #アクセスログのうち、15分以内の条件で引っ張る
     time = Time.now
-    accesslogs = Access.find(:all, :conditions => [" access_time >= '#{time - (60 * 15)}'"])
+    accesslogs = Access.find(:all, :conditions => [" access_time >= '#{time - (60 * 15)}'"], :order => ["created_at DESC"])
     
     #将来的にはLVでも絞れるようにしたい
     
@@ -73,7 +73,8 @@ class BobbReqController < ApplicationController
     status = 0
     battleRecord = BattleRecord.find(:all, \
                       :select => ["battle_records.req_user_id", "battle_records.id"], \
-                      :conditions => ["res_user_id = ? and battle_status = ?", user_id, status])
+                      :conditions => ["res_user_id = ? and battle_status = ?", user_id, status], \
+                      :order => ["created_at DESC"])
                       
     
     battleRecord.each do |record|
