@@ -216,10 +216,38 @@ class BobbReqController < ApplicationController
 
   # 対戦時選択カード情報登録
   def regist_selected_card
+    
+      battle_id = params[:battle_id]
+      user_id = params[:user_id]
+      turn_num = params[:turn_num]
+      
+      beetel_card_infolist = params[:beetel_card_infolist]
+      jsonNanalyzed = ActiveSupport::JSON.decode(beetel_card_infolist)
+      
+      jsonNanalyzed.each do |record|
+          # 使用カード情報テーブルにデータインサート
+          cards = SelectedCard.create(
+            :battle_id => battle_id,
+            :user_id => user_id,
+            :turn_num => turn_num,
+            :card_num => record.fetch("card_num"))
+      end
+      
+      render :json => jsonNanalyzed
+    
   end
 
   # 対戦時選択カード情報取得
   def enemy_selected_card
+        battle_id = params[:battle_id]
+        user_id = params[:user_id]
+        turn_num = params[:turn_num]
+
+        cards = SelectedCard.find(:all, :conditions => ["battle_id = ? and user_id = ? and turn_num = ?", battle_id, user_id, turn_num])
+
+        render :json => cards
+
+    
   end
 
   # 対戦終了/中断通知
