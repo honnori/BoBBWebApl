@@ -79,7 +79,7 @@ class BobbReqController < ApplicationController
     
     battleRecord.each do |record|
         # アクセスログから、本リクエストをかけたユーザに対戦要求をしているユーザの最新のアクセスログを取得する
-        user_access_info = Access.find(:last, :conditions => ["id = ?", record.req_user_id])
+        user_access_info = Access.find(:last, :conditions => ["user_id = ?", record.req_user_id])
       
         response = {
           "user_id" => user_access_info.user_id,
